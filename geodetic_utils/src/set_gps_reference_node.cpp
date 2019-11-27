@@ -191,8 +191,8 @@ int main(int argc, char **argv)
 
 	// std::cout << "passby gps_sub" << std::endl;
 
-// 	auto server_srv =
-//     		node->create_service<std_srvs::srv::Empty>("reset_gps_reference", reset_callback);
+	auto server_srv =
+    		node->create_service<std_srvs::srv::Empty>("reset_gps_reference", reset_callback);
 
 	// std::cout << "passby server_srv" << std::endl;
 
