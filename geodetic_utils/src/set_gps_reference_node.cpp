@@ -183,13 +183,16 @@ int main(int argc, char **argv)
 	// auto subscription = 
 	// 	node->create_subscription<std_msgs::msg::String>("weiL_topic", topic_callback);
 
+// 	auto gps_sub =
+// 		node->create_subscription<sensor_msgs::msg::NavSatFix>("gps_data", gps_callback, rmw_qos_profile_sensor_data);
 	auto gps_sub =
-		node->create_subscription<sensor_msgs::msg::NavSatFix>("gps_data", gps_callback, rmw_qos_profile_sensor_data);
+		node->create_subscription<sensor_msgs::msg::NavSatFix>(
+			"gps_data", rclcpp::SensorDataQoS(), gps_callback/*, rmw_qos_profile_sensor_data*/);
 
 	// std::cout << "passby gps_sub" << std::endl;
 
-	auto server_srv =
-    	node->create_service<std_srvs::srv::Empty>("reset_gps_reference", reset_callback);
+// 	auto server_srv =
+//     		node->create_service<std_srvs::srv::Empty>("reset_gps_reference", reset_callback);
 
 	// std::cout << "passby server_srv" << std::endl;
 
