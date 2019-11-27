@@ -310,10 +310,15 @@ int main(int argc, char **argv)
 		node->create_publisher<nav_msgs::msg::Odometry>("gps_odom", 1);
 
 	// Subscribe to IMU and GPS fixes, and convert in GPS callback
+// 	auto imu_sub =
+// 		node->create_subscription<sensor_msgs::msg::Imu>("imu", imu_callback, rmw_qos_profile_sensor_data);
 	auto imu_sub =
-		node->create_subscription<sensor_msgs::msg::Imu>("imu", imu_callback, rmw_qos_profile_sensor_data);
+		node->create_subscription<sensor_msgs::msg::Imu>(
+			"imu", rclcpp::SensorDataQoS(), imu_callback /*, rmw_qos_profile_sensor_data */);
+// 	auto gps_sub =
+// 		node->create_subscription<sensor_msgs::msg::NavSatFix>("/gps_data", gps_callback, rmw_qos_profile_sensor_data);
 	auto gps_sub =
-		node->create_subscription<sensor_msgs::msg::NavSatFix>("/gps_data", gps_callback, rmw_qos_profile_sensor_data);
+		node->create_subscription<sensor_msgs::msg::NavSatFix>("/gps_data", rclcpp::SensorDataQoS(), gps_callback);
 	auto altitude_sub =
 		node->create_subscription<std_msgs::msg::Float64>("external_altitude", 1, altitude_callback);
 
